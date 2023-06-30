@@ -9,6 +9,7 @@ import ml.heartfulcpvp.bridge.host.SkriptUtil;
 import org.apache.commons.lang.SerializationUtils;
 
 import java.io.IOException;
+import java.util.Locale;
 
 public class CGetVariableHandler implements HttpHandler {
     @Override
@@ -17,7 +18,7 @@ public class CGetVariableHandler implements HttpHandler {
         exchange.getResponseHeaders().set("Content-Type", "application/octet-stream; charset=UTF-8");
         LoggingUtil.Log("Request accepted ; " + requestURI + " / Node: " + exchange.getRemoteAddress());
 
-        var variable = requestURI.substring(requestURI.lastIndexOf("/") + 1);
+        var variable = requestURI.substring(requestURI.lastIndexOf("/") + 1).toLowerCase(Locale.ROOT);
         var response = new byte[0];
 
         var varContent = SkriptUtil.getVar(variable);
@@ -30,7 +31,7 @@ public class CGetVariableHandler implements HttpHandler {
                 ex.printStackTrace();
             }
         } else {
-            LoggingUtil.Log(variable + " was null");
+            LoggingUtil.Log(variable + " is null");
         }
 
         exchange.sendResponseHeaders(200, response.length);
