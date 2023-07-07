@@ -1,8 +1,6 @@
 package ml.heartfulcpvp.bridge.host;
 
 import com.google.gson.Gson;
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
 
 import java.io.File;
 import java.io.IOException;
@@ -13,6 +11,7 @@ public class Config {
     private static final String CONFIG_FILE_PATH = "./plugins/HeartfulCPvP/bridge-host/config.json";
     public static final int DEFAULT_PORT = 8080;
     public static final String DEFAULT_VARIABLE_CONTEXT_PATH = "/variable/";
+    public static final String DEFAULT_VARIABLES_CONTEXT_PATH = "/variables";
     public static final String DEFAULT_ADD_KILLS_CONTEXT_PATH = "/addkills/";
     public static final String DEFAULT_ADD_DEATHS_CONTEXT_PATH = "/adddeaths/";
     public static final String DEFAULT_PLAYER_DEATHS_VAR = "${player}::hoge";
@@ -20,6 +19,7 @@ public class Config {
 
     private int port;
     private String variableContextPath;
+    private String variablesContextPath;
     private String addKillsContextPath;
     private String addDeathsContextPath;
     private String playerDeathsVar;
@@ -73,6 +73,14 @@ public class Config {
         this.playerKillsVar = playerKillsVar;
     }
 
+    public String getVariablesContextPath() {
+        return variablesContextPath;
+    }
+
+    public void setVariablesContextPath(String variablesContextPath) {
+        this.variablesContextPath = variablesContextPath;
+    }
+
     private static Config config;
 
     public void saveConfig() throws IOException {
@@ -117,6 +125,7 @@ public class Config {
         conf.setPlayerDeathsVar(DEFAULT_PLAYER_DEATHS_VAR);
         conf.setPlayerKillsVar(DEFAULT_PLAYER_KILLS_VAR);
         conf.setVariableContextPath(DEFAULT_VARIABLE_CONTEXT_PATH);
+        conf.setVariablesContextPath(DEFAULT_VARIABLES_CONTEXT_PATH);
 
         return conf;
     }
