@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Locale;
 
-public class CGetVariablesHandler implements HttpHandler {
+public class CGetVariablesHandler implements IHostHttpHandler {
     @Override
     public void handle(HttpExchange exchange) throws IOException {
         var payload = HttpUtil.getPostPayload(exchange);
@@ -47,5 +47,10 @@ public class CGetVariablesHandler implements HttpHandler {
         var os = exchange.getResponseBody();
         os.write(response);
         os.close();
+    }
+
+    @Override
+    public String getContextPath() {
+        return Config.getConfig().getVariablesContextPath();
     }
 }

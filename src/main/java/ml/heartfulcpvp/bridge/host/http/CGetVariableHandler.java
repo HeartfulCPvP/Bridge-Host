@@ -4,6 +4,7 @@ import ch.njol.skript.lang.Variable;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import ml.heartfulcpvp.bridge.common.StreamObj;
+import ml.heartfulcpvp.bridge.host.Config;
 import ml.heartfulcpvp.bridge.host.LoggingUtil;
 import ml.heartfulcpvp.bridge.host.SkriptUtil;
 import org.apache.commons.lang.SerializationUtils;
@@ -11,7 +12,7 @@ import org.apache.commons.lang.SerializationUtils;
 import java.io.IOException;
 import java.util.Locale;
 
-public class CGetVariableHandler implements HttpHandler {
+public class CGetVariableHandler implements IHostHttpHandler {
     @Override
     public void handle(HttpExchange exchange) throws IOException {
         var requestURI = exchange.getRequestURI().toString();
@@ -38,5 +39,10 @@ public class CGetVariableHandler implements HttpHandler {
         var os = exchange.getResponseBody();
         os.write(response);
         os.close();
+    }
+
+    @Override
+    public String getContextPath() {
+        return Config.getConfig().getVariableContextPath();
     }
 }

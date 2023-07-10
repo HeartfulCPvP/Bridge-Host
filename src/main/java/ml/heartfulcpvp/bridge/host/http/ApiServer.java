@@ -1,5 +1,6 @@
 package ml.heartfulcpvp.bridge.host.http;
 
+import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
 import ml.heartfulcpvp.bridge.host.Config;
 import ml.heartfulcpvp.bridge.host.LoggingUtil;
@@ -9,12 +10,20 @@ import java.net.InetSocketAddress;
 import java.util.logging.Logger;
 
 public class ApiServer {
+    private static IHostHttpHandler[] handlers = {
+            new CGetVariableHandler(),
+            new CGetVariablesHandler()
+    };
+
     public static void start(int port) throws IOException {
         var server = HttpServer.create(new InetSocketAddress(port), 0);
         var logger = LoggingUtil.getLogger();
         var config = Config.getConfig();
 
-        server.createContext(config.getVariableContextPath(), new CGetVariableHandler());
+        for (var handler : handlers) {
+            logger.info("Initializing http handler : " + handler.getClass().getSimpleName() + " ; " + handler.getContextPath());
+            server.createContext(handler.getContextPath(), handler);
+        }
 
         server.setExecutor(null);
         server.start();
