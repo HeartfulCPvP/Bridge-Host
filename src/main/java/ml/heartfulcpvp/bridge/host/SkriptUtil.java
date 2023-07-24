@@ -15,7 +15,7 @@ public class SkriptUtil {
         return Variables.getVariable(varName, null, false);
     }
 
-    public static void setVar(String varName, String value){
+    public static void setVar(String varName, Object value){
         Variables.setVariable(varName, value, null, false);
     }
 

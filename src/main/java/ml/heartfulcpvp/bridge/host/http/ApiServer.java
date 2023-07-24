@@ -10,15 +10,16 @@ import java.net.InetSocketAddress;
 import java.util.logging.Logger;
 
 public class ApiServer {
-    private static IHostHttpHandler[] handlers = {
+    private static final IHostHttpHandler[] handlers = {
             new CGetVariableHandler(),
-            new CGetVariablesHandler()
+            new CGetVariablesHandler(),
+            new CAddDeathsHandler(),
+            new CAddKillsHandler()
     };
 
     public static void start(int port) throws IOException {
         var server = HttpServer.create(new InetSocketAddress(port), 0);
         var logger = LoggingUtil.getLogger();
-        var config = Config.getConfig();
 
         for (var handler : handlers) {
             logger.info("Initializing http handler : " + handler.getClass().getSimpleName() + " ; " + handler.getContextPath());
