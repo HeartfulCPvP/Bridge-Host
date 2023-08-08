@@ -2,6 +2,9 @@ package ml.heartfulcpvp.bridge.common.wrapper;
 
 import java.util.Map;
 
+/**
+ * 複数の値を同時に送るためのやつの返り値用
+ */
 public class ResponseVariables {
     private Map<String, Object> varMap;
 

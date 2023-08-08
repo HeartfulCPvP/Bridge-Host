@@ -6,8 +6,8 @@ import com.google.gson.Gson;
  * 各サーバーのプレイヤー一覧を送るためのやつ
  */
 public class PayloadPlayerList {
-    private String serverName;
-    private String[] players;
+    private String serverName; // 識別子
+    private String[] players; // プレイヤーのリスト
 
     public PayloadPlayerList(String serverName, String[] players) {
         this.serverName = serverName;

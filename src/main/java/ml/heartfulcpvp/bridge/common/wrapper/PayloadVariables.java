@@ -2,6 +2,9 @@ package ml.heartfulcpvp.bridge.common.wrapper;
 
 import com.google.gson.Gson;
 
+/**
+ * 複数の値を同時に送るためのやつのリクエストの送信用
+ */
 public class PayloadVariables {
     private String[] variables;
 
